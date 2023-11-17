@@ -34,4 +34,26 @@ sudo apt update && sudo apt install ansible
 ansible -- version
 ```
 
-### Step 2:
+### Step 2: Configure Jenkins Build Job to archive your repository every time changes are made
+
+* Log into Jenkins.
+
+```sh
+http://public_ip_jenkins_ansible_instance:8080
+```
+
+* Create a new Freestyle Job called `ansible` and point it to your `ansible-config-mgt` repository.
+
+* Configure a Post-Build Job to save all files.
+
+* Configure a webhook in GitHub and set the webhook to trigger `ansible` build. _(**Note**: Trigger Jenkins build exectution only for the main branch.)_
+
+* Test the setup by making changes to the README.md file in the `main` branch and make sure it starts a build automatically and Jenkins saves the files in the order shown below:
+
+```sh
+ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
+```
+
+### Step 3: Prepare your development envionment using Visual Studio Code
+
+* 
