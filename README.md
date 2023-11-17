@@ -25,7 +25,7 @@ The following steps are taken to install and configure **Ansible Client** as a *
 * Install Ansible on the `Jenkins-Ansible` server.
 
 ```sh
-sudo apt update && sudo apt install ansible
+sudo apt update && sudo apt install ansible -y
 ```
 
 * Check the version of Ansible running on your instance by running the following command:
@@ -44,7 +44,7 @@ http://public_ip_jenkins_ansible_instance:8080
 
 * Create a new Freestyle Job called `ansible` and point it to your `ansible-config-mgt` repository.
 
-* Configure a Post-Build Job to save all files.
+* Select GitHub hook trigger for GitScm polling and configure a Post-Build Job to save all files then click on apply and save.
 
 * Configure a webhook in GitHub and set the webhook to trigger `ansible` build. _(**Note**: Trigger Jenkins build exectution only for the main branch.)_
 
