@@ -56,4 +56,9 @@ ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
 
 ### Step 3: Prepare your development envionment using Visual Studio Code
 
-* 
+* Download and install VS Code, you can get it [here](https://code.visualstudio.com/download)
+
+* After successfully installing VS Code, configure it to connect to your newly created GitHub repository.
+
+* Clone down your `ansible-config-mgt` repo to your Jenins-Ansible Instance.
+
