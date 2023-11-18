@@ -256,3 +256,9 @@ git push --set-upstrean origin prj-145
 
 
 * Click on the `Confirm merge` button.
+
+* Head back to your terminal on VS Code, checkot from `prj-145` branch into the main and pull down the latest changes using the commands shown below:
+
+```sh
+git checkout main && git pull
+```
