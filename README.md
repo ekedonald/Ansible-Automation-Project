@@ -1,10 +1,10 @@
 # Ansible Automation Project
 ## Ansible Client as a Jump Server (Bastion Host)
-A [Jumo Server](https://en.wikipedia.org/wiki/Jump_server) (sometimes also referred as [Bastion Host](https://en.wikipedia.org/wiki/Bastion_host)) is an intermediary server through which access to internal network can be provided. If you think about the current architecture you are working on, ideally the Web Servers would be inside a secured network which cannot be reached directly from the Internet. That means, even DevOps engineers cannot `SSH` into the Web Servers directly and can only access it through a Jump Server - it provides better security and reduces [attack surface](https://en.wikipedia.org/wiki/Attack_surface).
+A [Jump Server](https://en.wikipedia.org/wiki/Jump_server) (sometimes also referred to as [Bastion Host](https://en.wikipedia.org/wiki/Bastion_host)) is an intermediary server through which access to the internal network can be provided. If you think about the current architecture you are working on, ideally the Web Servers would be inside a secured network that cannot be reached directly from the Internet. That means, even DevOps engineers cannot `SSH` into the Web Servers directly and can only access it through a Jump Server - it provides better security and reduces [attack surface](https://en.wikipedia.org/wiki/Attack_surface).
 
-In the diagram below, the Virtual Private Network (VPC) is divided into two subents (i.e. Public Subnet has Public IP Addresses and Private Subnet is only reachable by Private IP addresses).
+In the diagram below, the Virtual Private Network (VPC) is divided into two subnets (i.e. Public Subnet has Public IP Addresses and Private Subnet is only reachable by Private IP addresses).
 
-## How to Install and Cofigure Ansible Client to act as a Jump Server/Bastion Host and Create a simple Ansible Playbook to automate server configuration
+## How to Install and Configure Ansible Client to act as a Jump Server/Bastion Host and Create a simple Ansible Playbook to automate server configuration
 
 ### Prerequistes
 1. Jenkins Server
@@ -14,7 +14,7 @@ In the diagram below, the Virtual Private Network (VPC) is divided into two sube
 5. Load Balancer
 6. Database Server
 
-The following steps are taken to install and configure **Ansible Client** as a **Jump Server/Bastion Host** and create a simple Ansible Playbook to automate servers configuration:
+The following steps are taken to install and configure **Ansible Client** as a **Jump Server/Bastion Host** and create a simple Ansible Playbook to automate server configuration:
 
 ### Step 1: Install and Configure Ansible on an EC2 Instance
 
@@ -68,7 +68,7 @@ http://private_ip_address_jenkins_ansible_server:8080/github-webhook/
 ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
 ```
 
-### Step 4: Prepare your development envionment using Visual Studio Code
+### Step 4: Prepare your development environment using Visual Studio Code
 
 * Download and install VS Code, you can get it [here](https://code.visualstudio.com/download)
 
@@ -88,7 +88,7 @@ cd ansible-config-mgt && git pull
 
 ### Step 5: Begin Ansible development and Set up an Ansible Inventory
 
-* Create a new branch in the `ansible-config-mgt` repository that will be used for development of a new feature using the command shown below:
+* Create a new branch in the `ansible-config-mgt` repository that will be used for the development of a new feature using the command shown below:
 
 ```sh
 git checkout -b prj-145
@@ -108,13 +108,13 @@ mkdir playbooks inventory
 cd playbooks && touch common.yml
 ```
 
-* Create inventory files for each environment (i.e. Devlopment, Staging, Testing and Production) in the inventory directory.
+* Create inventory files for each environment (i.e. Development, Staging, Testing and Production) in the inventory directory.
 
 ```sh
 cd .. && cd inventory && touch dev staging uat prod
 ```
 
-An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules and tasks in a playbook operate. Since our intention is to execute Linux commands on remote hosts and ensure that it is the intended configuration particular server that occurs. It is important to have a way to organize our hosts in such an Inventory.
+An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules and tasks in a playbook operate. Since we intend to execute Linux commands on remote hosts and ensure that it is the intended configuration particular server that occurs. It is important to have a way to organize our hosts in such an Inventory.
 
 * Update your `inventory/dev.yml` file with the code shown below:
 
@@ -137,7 +137,7 @@ An Ansible inventory file defines the hosts and groups of hosts upon which comma
 
 Ansible uses TCP port 22 by default which means it needs to `ssh` into target servers from `Jenkins-Ansible` Server. To achieve this, implement the concept of [ssh-agent](https://smallstep.com/blog/ssh-agent-explained/#:~:text=ssh%2Dagent%20is%20a%20key,you%20connect%20to%20a%20server.&text=It%20doesn't%20allow%20your%20private%20keys%20to%20be%20exported.).
 
-The following steps are taken to setup SSH agent and connect VS Code yo your `Jenkins-Ansible`:
+The following steps are taken to setup the ssh-agent and connect VS Code to your `Jenkins-Ansible`:
 
 1. On your VS Code terminal, run the following command to start up the `ssh-agent`:
 
@@ -187,11 +187,11 @@ chmod 400 web11.pem
 ssh-add web11.pem
 ```
 
-_Note that if you used different keypairs when provisioning your servers (i.e NFS, Database, Load Balancers and Web), you must create files that match the keypairs and add them to the ssh-agent._
+_Note that if you used different keypairs when provisioning your servers (i.e. NFS, Database, Load Balancers and Web), you must create files that match the keypairs and add them to the ssh-agent._
 
 ### Step 8: Create a common playbook
 
-It is time to start giving Ansible the instructions on what you need to be performed on all servers listen in `inventory/dev`. In the `common.yml` playbook, you will write cofiguration for repeatable, re-usable and multi-machine tasks that is common to systems with the infrastructure.
+It is time to start giving Ansible the instructions on what you need to perform on all servers listen in `inventory/dev`. In the `common.yml` playbook, you will write configurations for repeatable, reusable and multi-machine tasks that are common to systems with the infrastructure.
 
 * Update your `playbooks/common.yml` file with the following code:
 
@@ -221,13 +221,13 @@ It is time to start giving Ansible the instructions on what you need to be perfo
         state: latest
 ```
 
-The code above has two plays, the **first play** is dedicated to the **RHEL Servers** (i.e. NFS, Database, Web). The task will be performed as the `root` user hence the use of the **become: yes** key value pair. Since it's they are all **RHEL Based Servers**, the `yum module` is used to install `wireshark` and finally the **state: latest** key value pair is used to specify that the wireshark installed is the laetst version.
+The code above has two plays, the **first play** is dedicated to the **RHEL Servers** (i.e. NFS, Database, Web). The task will be performed as the `root` user hence the use of the **become: yes** key value pair. Since it's they are all **RHEL Based Servers**, the `yum module` is used to install `wireshark` and finally the **state: latest** key-value pair is used to specify that the wireshark installed is the latest version.
 
-The **second play** is dedicated to the **Ubuntu Server** (i.e Load Balancer), it has two tasks: The **first task** is used to update the server. The `update_cahce` is similar to `apt update` and the **second task** is used to download the latest version of `wireshark` using the `apt module`.
+The **second play** is dedicated to the **Ubuntu Server** (i.e. Load Balancer), it has two tasks: The **first task** is used to update the server. The `update_cahce` is similar to `apt update` and the **second task** is used to download the latest version of `wireshark` using the `apt module`.
 
 ### Step 9: Update GIT with the latest code
 
-Now that all of your directories and files live on your local machine, you need to push changes made locally to GitHub. Remember you have been working on a seperate branch `prj-145`, you need to get your branch peer reviewed and pushed the `main` branch. The following steps are taken to achieve this:
+Now that all of your directories and files live on your local machine, you need to push changes made locally to GitHub. Remember you have been working on a separate branch `prj-145`, you need to get your branch peer-reviewed and pushed to the `main` branch. The following steps are taken to achieve this:
 
 * Use the following commands to check the status of your branch, add files and directories then commit changes and push your branch to GitHub:
 
@@ -244,7 +244,7 @@ git commit -m "commit message"
 ```
 
 ```sh
-git push --set-upstrean origin prj-145
+git push --set-upstream origin prj-145
 ```
 
 * Got to your `ansible-config-mgt` repository on GitHub and click on the `Compare & pull request` button.
@@ -255,13 +255,13 @@ git push --set-upstrean origin prj-145
 
 * Click on the `Confirm merge` button.
 
-* Head back to your terminal on VS Code, checkot from `prj-145` branch into the main and pull down the latest changes using the commands shown below:
+* Head back to your terminal on VS Code, checkout from `prj-145` branch into the main and pull down the latest changes using the commands shown below:
 
 ```sh
 git checkout main && git pull
 ```
 
-* Once your code changes appear on the `main` branch, Jenkins will be triggered to do the `ansible` job and save all the files (i.e. build artifacts) to .
+* Once your code changes appear on the `main` branch, Jenkins will be triggered to do the `ansible` job and save all the files (i.e. build artifacts).
 
 
 ### Step 10: Run the first Ansible test
@@ -272,7 +272,7 @@ git checkout main && git pull
 ssh ubuntu@public_ip_address_of_jenkins_ansible
 ```
 
-* The build artifact are saved in the `/var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/` directory on the server.
+* The build artifacts are saved in the `/var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/` directory on the server.
 
 ```sh
 cd /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ && ll
