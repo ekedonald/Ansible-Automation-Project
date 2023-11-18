@@ -46,7 +46,7 @@ http://public_ip_jenkins_ansible_instance:8080
 
 * Select GitHub hook trigger for GitScm polling and configure a Post-Build Job to save all files then click on apply and save.
 
-### Step 3: Configure a webhook in GitHub and set the webhook to trigger `ansible` build
+### Step 3: Configure a webhook in GitHub and set the webhook to trigger Ansible build
 
 * Go to the `ansible-config-mgt` repository on your GitHub account and click on settings.
 
@@ -62,11 +62,7 @@ http://public_ip_jenkins_ansible_instance:8080
 http://private_ip_address_jenkins_ansible_server:8080/github-webhook/
 ```
 
-* Test the setup by making changes to the README.md file in the `main` branch and make sure it starts a build automatically and Jenkins saves the files in the order shown below:
-
-```sh
-ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
-```
+* Test the setup by making changes to the README.md file in the `main` branch and make sure it starts a build automatically as shown below:
 
 ### Step 4: Prepare your development environment using Visual Studio Code
 
