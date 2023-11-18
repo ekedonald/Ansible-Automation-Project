@@ -297,3 +297,6 @@ ansible nfs,db -i inventory/dev -m command -a "wireshark --version"
 ```sh
 ansible lb -i inventory/dev -m command -a "wireshark --version"
 ```
+
+Your updated Ansible architecture now looks like this:
+
