@@ -187,6 +187,72 @@ chmod 400 web11.pem
 ssh-add web11.pem
 ```
 
-
 _Note that if you used different keypairs when provisioning your servers (i.e NFS, Database, Load Balancers and Web), you must create files that match the keypairs and add them to the ssh-agent._
 
+### Step 8: Create a common playbook
+
+It is time to start giving Ansible the instructions on what you need to be performed on all servers listen in `inventory/dev`. In the `common.yml` playbook, you will write cofiguration for repeatable, re-usable and multi-machine tasks that is common to systems with the infrastructure.
+
+* Update your `playbooks/common.yml` file with the following code:
+
+```sh
+---
+- name: update web, nfs and db servers
+  hosts: webservers, nfs, db
+  become: yes
+  tasks:
+    - name: ensure wireshark is at the latest version
+      yum:
+        name: wireshark
+        state: latest
+   
+
+- name: update LB server
+  hosts: lb
+  become: yes
+  tasks:
+    - name: Update apt repo
+      apt: 
+        update_cache: yes
+
+    - name: ensure wireshark is at the latest version
+      apt:
+        name: wireshark
+        state: latest
+```
+
+The code above has two plays, the **first play** is dedicated to the **RHEL Servers** (i.e. NFS, Database, Web). The task will be performed as the `root` user hence the use of the **become: yes** key value pair. Since it's they are all **RHEL Based Servers**, the `yum module` is used to install `wireshark` and finally the **state: latest** key value pair is used to specify that the wireshark installed is the laetst version.
+
+The **second play** is dedicated to the **Ubuntu Server** (i.e Load Balancer), it has two tasks: The **first task** is used to update the server. The `update_cahce` is similar to `apt update` and the **second task** is used to download the latest version of `wireshark` using the `apt module`.
+
+### Step 9: Update GIT with the latest code
+
+Now that all of your directories and files live on your local machine, you need to push changes made locally to GitHub. Remember you have been working on a seperate branch `prj-145`, you need to get your branch peer reviewed and pushed the `main` branch. The following steps are taken to achieve this:
+
+* Use the following commands to check the status of your branch, add files and directories then commit changes and push your branch to GitHub:
+
+```sh
+git status
+```
+
+```sh
+git add inventory playbooks
+```
+
+```sh
+git commit -m "commit message"
+```
+
+```sh
+git push --set-upstrean origin prj-145
+```
+
+* Got to your `ansible-config-mgt` repository on GitHub and click on the `Compare & pull request` button.
+
+* Click on the `Create pull request` button.
+
+
+* Click on the `Merge pull request` button.
+
+
+* Click on the `Confirm merge` button.
