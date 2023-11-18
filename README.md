@@ -262,3 +262,22 @@ git push --set-upstrean origin prj-145
 ```sh
 git checkout main && git pull
 ```
+
+* Once your code changes appear on the `main` branch, Jenkins will be triggered to do the `ansible` job and save all the files (i.e. build artifacts) to .
+
+
+### Step 10: Run the first Ansible test
+
+* SSH into the `Jenkins-Ansible` server.
+
+```sh
+ssh ubuntu@public_ip_address_of_jenkins_ansible
+```
+
+* The build artifact are saved in the `/var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/` directory on the server.
+
+```sh
+cd /var/lib/jenkins/jobs/ansible/builds/3/archive/ && ll
+```
+
+
