@@ -44,7 +44,7 @@ http://public_ip_jenkins_ansible_instance:8080
 
 * Create a new Freestyle Job called `ansible`, select **discard old builds** then give it a maximum of 2 builds to keep and point it to your `ansible-config-mgt` repository.
 
-* Select GitHub hook trigger for GitScm polling and configure a Post-Build Job to save all files then click on apply and save.
+* Select GitHub hook trigger for GitScm polling and configure a Post-Build Job (i.e. Archive the artifacts) to save all `**` files then click on apply and save.
 
 ### Step 3: Configure a webhook in GitHub and set the webhook to trigger Ansible build
 
