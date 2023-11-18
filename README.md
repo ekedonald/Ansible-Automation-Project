@@ -251,9 +251,7 @@ git push --set-upstrean origin prj-145
 
 * Click on the `Create pull request` button.
 
-
 * Click on the `Merge pull request` button.
-
 
 * Click on the `Confirm merge` button.
 
@@ -277,7 +275,25 @@ ssh ubuntu@public_ip_address_of_jenkins_ansible
 * The build artifact are saved in the `/var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/` directory on the server.
 
 ```sh
-cd /var/lib/jenkins/jobs/ansible/builds/3/archive/ && ll
+cd /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ && ll
 ```
 
+* Run the following command to run the Ansible Playbook.
 
+```sh
+ansible-playbook -i inventory/dev playbooks/common.yml
+```
+
+* Use the Ansible Adhoc command to check if wireshark has been installed on the servers.
+
+```sh
+ansible webservers -i inventory/dev -m command -a "wireshark --version"
+```
+
+```sh
+ansible nfs,db -i inventory/dev -m command -a "wireshark --version"
+```
+
+```sh
+ansible lb -i inventory/dev -m command -a "wireshark --version"
+```
