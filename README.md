@@ -221,7 +221,7 @@ It is time to start giving Ansible the instructions on what you need to perform 
         state: latest
 ```
 
-The code above has two plays, the **first play** is dedicated to the **RHEL Servers** (i.e. NFS, Database, Web). The task will be performed as the `root` user hence the use of the **become: yes** key value pair. Since it's they are all **RHEL Based Servers**, the `yum module` is used to install `wireshark` and finally the **state: latest** key-value pair is used to specify that the wireshark installed is the latest version.
+The code above has two plays, the **first play** is dedicated to the **RHEL Servers** (i.e. NFS, Database, Web). The task will be performed as the `root` user hence the use of the **become: yes** key value pair. Since they are all **RHEL Based Servers**, the `yum module` is used to install `wireshark` and finally the **state: latest** key-value pair is used to specify that the wireshark installed is the latest version.
 
 The **second play** is dedicated to the **Ubuntu Server** (i.e. Load Balancer), it has two tasks: The **first task** is used to update the server. The `update_cahce` is similar to `apt update` and the **second task** is used to download the latest version of `wireshark` using the `apt module`.
 
