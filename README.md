@@ -42,11 +42,25 @@ ansible -- version
 http://public_ip_jenkins_ansible_instance:8080
 ```
 
-* Create a new Freestyle Job called `ansible` and point it to your `ansible-config-mgt` repository.
+* Create a new Freestyle Job called `ansible`, select **discard old builds** then give it a maximum of 2 builds to keep and point it to your `ansible-config-mgt` repository.
 
 * Select GitHub hook trigger for GitScm polling and configure a Post-Build Job to save all files then click on apply and save.
 
-* Configure a webhook in GitHub and set the webhook to trigger `ansible` build. _(**Note**: Trigger Jenkins build exectution only for the main branch.)_
+### Step 3: Configure a webhook in GitHub and set the webhook to trigger `ansible` build
+
+* Go to the `ansible-config-mgt` repository on your GitHub account and click on settings.
+
+* Click on the webhooks tab.
+
+* Click on `Add Webhook`
+
+* Input your password.
+
+* In the **Payload URL**, paste the following URL shown below and click on the **Add Webhook** button:
+
+```sh
+http://private_ip_address_jenkins_ansible_server:8080/github-webhook/
+```
 
 * Test the setup by making changes to the README.md file in the `main` branch and make sure it starts a build automatically and Jenkins saves the files in the order shown below:
 
@@ -54,7 +68,7 @@ http://public_ip_jenkins_ansible_instance:8080
 ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
 ```
 
-### Step 3: Prepare your development envionment using Visual Studio Code
+### Step 4: Prepare your development envionment using Visual Studio Code
 
 * Download and install VS Code, you can get it [here](https://code.visualstudio.com/download)
 
@@ -66,10 +80,21 @@ ls /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/
 git clone <ansible-config-mgt-repository-link>
 ```
 
-* Cd into the `ansible-config-mgt` directory and pull the repo to ensure the directory is up to date.
+* Go into the `ansible-config-mgt` directory and pull the repo to ensure the directory is up to date.
+
+```sh
+cd ansible-config-mgt && git pull
+```
+
+### Step 5: Begin Ansible development
+
+* Create a new branch in the `ansible-config-mgt` repository that will be used for development of a new feature using the command shown below:
+
+```sh
+git checkout -b prj-145
+```
 
 
-### Step 4: Begin Ansible development
 
-### Step 5: Set up an Ansible Inventory
+### Step 6: Set up an Ansible Inventory
 
