@@ -4,6 +4,8 @@ A [Jump Server](https://en.wikipedia.org/wiki/Jump_server) (sometimes also refer
 
 In the diagram below, the Virtual Private Network (VPC) is divided into two subnets (i.e. Public Subnet has Public IP Addresses and Private Subnet is only reachable by Private IP addresses).
 
+![bastion host](./images/0.%20bastion%20host.png)
+
 ## How to Install and Configure Ansible Client to act as a Jump Server/Bastion Host and Create a simple Ansible Playbook to automate server configuration
 
 ### Prerequistes
@@ -33,6 +35,9 @@ sudo apt update && sudo apt install ansible -y
 ```sh
 ansible -- version
 ```
+
+![initial setup](./images/1.%20initial%20set%20up.png)
+_Your set up will look like this._
 
 ### Step 2: Configure Jenkins Build Job to archive your repository every time changes are made
 
@@ -294,5 +299,5 @@ ansible nfs,db -i inventory/dev -m command -a "wireshark --version"
 ansible lb -i inventory/dev -m command -a "wireshark --version"
 ```
 
-Your updated Ansible architecture now looks like this:
-
+![final setup](./images/11.%20final%20set%20up.png)
+_Your updated Ansible architecture now looks like this._
