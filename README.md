@@ -86,7 +86,7 @@ git clone <ansible-config-mgt-repository-link>
 cd ansible-config-mgt && git pull
 ```
 
-### Step 5: Begin Ansible development
+### Step 5: Begin Ansible development and Set up an Ansible Inventory
 
 * Create a new branch in the `ansible-config-mgt` repository that will be used for development of a new feature using the command shown below:
 
@@ -114,11 +114,28 @@ cd playbooks && touch common.yml
 cd .. && cd inventory && touch dev staging uat prod
 ```
 
-### Step 6: Set up an Ansible Inventory
-
 An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules and tasks in a playbook operate. Since our intention is to execute Linux commands on remote hosts and ensure that it is the intended configuration particular server that occurs. It is important to have a way to organize our hosts in such an Inventory.
 
-Note: Ansible used TCP port 22 by default which means it needs to `ssh` into target servers from `Jenkins-Ansible` Server. To achieve this, implement the concept of [ssh-agent](https://smallstep.com/blog/ssh-agent-explained/#:~:text=ssh%2Dagent%20is%20a%20key,you%20connect%20to%20a%20server.&text=It%20doesn't%20allow%20your%20private%20keys%20to%20be%20exported.).
+* Update your `inventory/dev.yml` file with the code shown below:
+
+```sh
+[nfs]
+<NFS-Server-Private-IP-Address> ansible_ssh_user='ec2-user'
+
+[webservers]
+<Web-Server1-Private-IP-Address> ansible_ssh_user='ec2-user'
+<Web-Server2-Private-IP-Address> ansible_ssh_user='ec2-user'
+
+[db]
+<Database-Private-IP-Address> ansible_ssh_user='ec2-user' 
+
+[lb]
+<Load-Balancer-Private-IP-Address> ansible_ssh_user='ubuntu'
+```
+
+### Step 6: Setup an ssh-agent and Connect VS Code to your Jenkins-Ansible Instance
+
+Ansible uses TCP port 22 by default which means it needs to `ssh` into target servers from `Jenkins-Ansible` Server. To achieve this, implement the concept of [ssh-agent](https://smallstep.com/blog/ssh-agent-explained/#:~:text=ssh%2Dagent%20is%20a%20key,you%20connect%20to%20a%20server.&text=It%20doesn't%20allow%20your%20private%20keys%20to%20be%20exported.).
 
 The following steps are taken to setup SSH agent and connect VS Code yo your `Jenkins-Ansible`:
 
@@ -146,5 +163,30 @@ ssh-add -l
 ssh -A ubuntu@public_ip_address_of_jenkins_ansible
 ```
 
-Note that your Load Balancer server user is `ubuntu` while the Database, Web and NFS Server's user is `ec2-user` since they are **RHEL-based servers**.
+_Note that your Load Balancer server user is `ubuntu` while the Database, Web and NFS Server's user is `ec2-user` since they are **RHEL-based servers**._
+
+
+### Step 7: Set up an ssh-agent on the Jenkins-Ansible Instance so it will be able to connect to the other servers
+
+* Run the following command to start up the `ssh-agent`
+
+```sh
+eval `ssh-agent -s`
+```
+
+* Create a file similar to the keypair file used to ssh into your instance and paste the content of the keypair file.
+
+```sh
+vi web11.pem
+```
+
+* Give write permissions to the file and add the newly created file into the ssh-agent using the commands shown below:
+
+```sh
+chmod 400 web11.pem
+ssh-add web11.pem
+```
+
+
+_Note that if you used different keypairs when provisioning your servers (i.e NFS, Database, Load Balancers and Web), you must create files that match the keypairs and add them to the ssh-agent._
 
