@@ -338,6 +338,8 @@ git checkout main && git pull
 
 * Once your code changes appear on the `main` branch, Jenkins will be triggered to do the `ansible` job and save all the files (i.e. build artifacts).
 
+![build artifacts](./images/9.%20main%20branch%20triggered%20job.png)
+
 
 ### Step 10: Run the first Ansible test
 
