@@ -349,11 +349,15 @@ git checkout main && git pull
 ssh ubuntu@public_ip_address_of_jenkins_ansible
 ```
 
+![ssh jenkisn-ansible server](./images/10.%20ssh%20jenkins-ansible%20server.png)
+
 * The build artifacts are saved in the `/var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/` directory on the server.
 
 ```sh
 cd /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ && ll
 ```
+
+![cd /var/lib/jenkins/jobs/builds & ll](./images/10.%20cd%20:var:lib:jenkins:jobs%20&%20ll.png)
 
 * Run the following command to run the Ansible Playbook.
 
@@ -361,19 +365,27 @@ cd /var/lib/jenkins/jobs/ansible/builds/<build_number>/archive/ && ll
 ansible-playbook -i inventory/dev playbooks/common.yml
 ```
 
+![run asnible playbook](./images/10.%20run%20ansible%20playbook.png)
+
 * Use the Ansible Adhoc command to check if wireshark has been installed on the servers.
 
 ```sh
 ansible webservers -i inventory/dev -m command -a "wireshark --version"
 ```
 
+![ansible adhoc1](./images/10.%20ansible%20adhoc1.png)
+
 ```sh
 ansible nfs,db -i inventory/dev -m command -a "wireshark --version"
 ```
 
+![ansible adhoc2](./images/10.%20ansible%20adhoc2.png)
+
 ```sh
 ansible lb -i inventory/dev -m command -a "wireshark --version"
 ```
+
+![ansible adhoc3](./images/10.%20ansible%20adhoc3.png)
 
 ![final setup](./images/11.%20final%20set%20up.png)
 _Your updated Ansible architecture now looks like this._
