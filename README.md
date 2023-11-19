@@ -37,7 +37,7 @@ sudo apt update && sudo apt install ansible -y
 * Check the version of Ansible running on your instance by running the following command:
 
 ```sh
-ansible --version
+ansible -- version
 ```
 
 ![ansible version](./images/1.%20ansible%20version.png)
@@ -201,7 +201,7 @@ ssh-add <path_to_the_private_key_of_jenkins_ansible_instance>
 
 ![ssh-add keypair](./images/6.%20ssh-add%20keypair.png)
 
-3. Confirm that the key has been added to the ssh-agent using the command shown below:
+3. Confirm that the key has been added to the SSH-Agent using the command shown below:
 
 ```sh
 ssh-add -l
@@ -209,7 +209,7 @@ ssh-add -l
 
 ![ssh-add -l](./images/6.%20ssh-add%20-l.png)
 
-4. Now, ssh into your `Jenkins-Ansible` server using ssh-agent.
+4. SSH into your `Jenkins-Ansible` server using SSH-Agent.
 
 ```sh
 ssh -A ubuntu@public_ip_address_of_jenkins_ansible
