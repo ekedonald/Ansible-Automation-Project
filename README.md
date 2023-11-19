@@ -338,6 +338,8 @@ git push --set-upstream origin prj-145
 git checkout main && git pull
 ```
 
+![git checkout main && git pull](./images/9.%20git%20checkout%20main%20&%20git%20pull.png)
+
 * Once your code changes appear on the `main` branch, Jenkins will be triggered to do the `ansible` job and save all the files (i.e. build artifacts).
 
 ![build artifacts](./images/9.%20main%20branch%20triggered%20job.png)
