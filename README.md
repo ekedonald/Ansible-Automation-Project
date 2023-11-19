@@ -316,7 +316,7 @@ git push --set-upstream origin prj-145
 
 ![git push branch](./images/9.%20git%20push%20branch.png)
 
-* Got to your `ansible-config-mgt` repository on GitHub and click on the `Compare & pull request` button.
+* Go to your `ansible-config-mgt` repository on GitHub and click on the `Compare & pull request` button.
 
 ![compare & pull request](./images/9.%20compare%20&%20pull%20request.png)
 
