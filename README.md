@@ -42,9 +42,6 @@ ansible -- version
 
 ![ansible version](./images/1.%20ansible%20version.png)
 
-![initial setup](./images/1.%20initial%20set%20up.png)
-_Your set up will look like this._
-
 ### Step 2: Configure Jenkins Build Job to archive your repository every time changes are made
 
 * Log into Jenkins.
@@ -98,6 +95,11 @@ http://private_ip_address_jenkins_ansible_server:8080/github-webhook/
 * Test the setup by making changes to the README.md file in the `main` branch and make sure it starts a build automatically as shown below:
 
 ![test the setup](./images/3.%20test%20setup.png)
+
+Your set up will look like this:
+![initial setup](./images/1.%20initial%20set%20up.png)
+
+_**Note**: Every time you start/stop your `Jenkins-Ansible` server, you have to reconfigure GitHub webhook to a new IP address in order to avoid it, it makes sense to allocate an [Elastic IP](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html) to your `Jenkins-Ansible` server. However, Elastic IP is only free when it is allocated to an EC Instance, so do not forget to release the Elastic IP once you terminate your EC2 Instance._
 
 ### Step 4: Prepare your development environment using Visual Studio Code
 
@@ -234,7 +236,7 @@ vi web11.pem
 ```
 
 ![cat web11.pem](./images/7.%20web11_pem.png)
-_The contents of this keypair file will be pasted into the `web11.pem` on the **Jenkins-Ansible** Server._
+_The contents of this keypair file will be pasted into the `web11.pem` file on the **Jenkins-Ansible** Server._
 
 * Give write permissions to the file and add the newly created file into the ssh-agent using the commands shown below:
 
