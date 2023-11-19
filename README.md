@@ -179,13 +179,13 @@ An Ansible inventory file defines the hosts and groups of hosts upon which comma
 
 ![update inventory/dev.yml](./images/5.%20update%20inventory:dev.png)
 
-### Step 6: Setup an ssh-agent and Connect VS Code to your Jenkins-Ansible Instance
+### Step 6: Setup an SSH-Agent and Connect VS Code to your Jenkins-Ansible Instance
 
-Ansible uses TCP port 22 by default which means it needs to `ssh` into target servers from `Jenkins-Ansible` Server. To achieve this, implement the concept of [ssh-agent](https://smallstep.com/blog/ssh-agent-explained/#:~:text=ssh%2Dagent%20is%20a%20key,you%20connect%20to%20a%20server.&text=It%20doesn't%20allow%20your%20private%20keys%20to%20be%20exported.).
+Ansible uses TCP port 22 by default which means it needs to `SSH` into target servers from `Jenkins-Ansible` Server. To achieve this, implement the concept of [SSH-Agent](https://smallstep.com/blog/ssh-agent-explained/#:~:text=ssh%2Dagent%20is%20a%20key,you%20connect%20to%20a%20server.&text=It%20doesn't%20allow%20your%20private%20keys%20to%20be%20exported.).
 
 The following steps are taken to setup the ssh-agent and connect VS Code to your `Jenkins-Ansible`:
 
-1. On your VS Code terminal, run the following command to start up the `ssh-agent`:
+1. On your VS Code terminal, run the following command to start up the `SSH-Agent`:
 
 ```sh
 eval `ssh-agent -s`
@@ -193,7 +193,7 @@ eval `ssh-agent -s`
 
 ![eval ssh-agent](./images/6.%20eval%20ssh-agent%20-s.png)
 
-2. Run the following command to add the private key (i.e. keypair used to create the Jenkins-Ansible Instance) to the ssh-agent:
+2. Run the following command to add the private key (i.e. keypair used to create the Jenkins-Ansible Instance) to the SSH-Agent:
 
 ```sh
 ssh-add <path_to_the_private_key_of_jenkins_ansible_instance>
@@ -219,9 +219,9 @@ ssh -A ubuntu@public_ip_address_of_jenkins_ansible
 _Note that your Load Balancer server user is `ubuntu` while the Database, Web and NFS Server's user is `ec2-user` since they are **RHEL-based servers**._
 
 
-### Step 7: Set up an ssh-agent on the Jenkins-Ansible Instance so it will be able to connect to the other servers
+### Step 7: Set up an SSH-Agent on the Jenkins-Ansible Instance so it will be able to connect to the other servers
 
-* Run the following command to start up the `ssh-agent`
+* Run the following command to start up the `SSH-Agent`
 
 ```sh
 eval `ssh-agent -s`
@@ -229,7 +229,7 @@ eval `ssh-agent -s`
 
 ![eval ssh-agent -s](./images/7.%20eval%20ssh-agent%20-s.png)
 
-* Create a file similar to the keypair file used to ssh into your instance and paste the content of the keypair file.
+* Create a file similar to the keypair file used to SSH into your instance and paste the content of the keypair file.
 
 ```sh
 vi web11.pem
@@ -238,7 +238,7 @@ vi web11.pem
 ![cat web11.pem](./images/7.%20web11_pem.png)
 _The contents of this keypair file will be pasted into the `web11.pem` file on the **Jenkins-Ansible** Server._
 
-* Give write permissions to the file and add the newly created file into the ssh-agent using the commands shown below:
+* Give write permissions to the file and add the newly created file into the SSH-Agent using the commands shown below:
 
 ```sh
 chmod 400 web11.pem
