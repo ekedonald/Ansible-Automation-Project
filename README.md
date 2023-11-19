@@ -225,11 +225,16 @@ _Note that your Load Balancer server user is `ubuntu` while the Database, Web an
 eval `ssh-agent -s`
 ```
 
+![eval ssh-agent -s](./images/7.%20eval%20ssh-agent%20-s.png)
+
 * Create a file similar to the keypair file used to ssh into your instance and paste the content of the keypair file.
 
 ```sh
 vi web11.pem
 ```
+
+![cat web11.pem](./images/7.%20web11_pem.png)
+_The contents of this keypair file will be pasted into the `web11.pem` on the **Jenkins-Ansible** Server._
 
 * Give write permissions to the file and add the newly created file into the ssh-agent using the commands shown below:
 
@@ -238,6 +243,7 @@ chmod 400 web11.pem
 ssh-add web11.pem
 ```
 
+![chmod ssh-add web11.pem](./images/7.%20chmod%20&%20ssh-add%20web11.png)
 _Note that if you used different keypairs when provisioning your servers (i.e. NFS, Database, Load Balancers and Web), you must create files that match the keypairs and add them to the ssh-agent._
 
 ### Step 8: Create a common playbook
