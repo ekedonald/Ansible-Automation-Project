@@ -73,11 +73,19 @@ http://public_ip_jenkins_ansible_instance:8080
 
 * Go to the `ansible-config-mgt` repository on your GitHub account and click on settings.
 
+![ansible config mgt repo settings](./images/3.%20ansible-config-mgt%20repository.png)
+
 * Click on the webhooks tab.
+
+![webhooks tab](./images/3.%20webhooks%20tab.png)
 
 * Click on `Add Webhook`
 
+![add webhook](./images/3.%20add%20webhook.png)
+
 * Input your password.
+
+![input password](./images/3.%20input%20password.png)
 
 * In the **Payload URL**, paste the following URL shown below and click on the **Add Webhook** button:
 
@@ -85,7 +93,11 @@ http://public_ip_jenkins_ansible_instance:8080
 http://private_ip_address_jenkins_ansible_server:8080/github-webhook/
 ```
 
+![payload url](./images/3.%20payload%20url.png)
+
 * Test the setup by making changes to the README.md file in the `main` branch and make sure it starts a build automatically as shown below:
+
+![test the setup](./images/3.%20test%20setup.png)
 
 ### Step 4: Prepare your development environment using Visual Studio Code
 
