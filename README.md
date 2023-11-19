@@ -129,6 +129,7 @@ cd ansible-config-mgt && git pull
 git checkout -b prj-145
 ```
 
+![git checkout prj-145](./images/5.%20git%20checkout%20-b%20prj-145.png)
 _Note that running the above command will create a new branch and switch to the new branch._
 
 * Create a `playbooks` (i.e. used to store all the playbook files) and `inventory` (i.e. used to keep your hosts organized) directory.
@@ -137,11 +138,15 @@ _Note that running the above command will create a new branch and switch to the 
 mkdir playbooks inventory
 ```
 
+![mkdir playbooks inventory](./images/5.%20mkdir%20playbooks%20inventory.png)
+
 * Create your first playbook named `common.yml` in the playbooks directory.
 
 ```sh
 cd playbooks && touch common.yml
 ```
+
+![cd playbooks & touch common.yml](./images/5.%20cd%20playbooks%20&%20touch%20common.png)
 
 * Create inventory files for each environment (i.e. Development, Staging, Testing and Production) in the inventory directory.
 
