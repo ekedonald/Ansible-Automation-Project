@@ -154,6 +154,8 @@ cd playbooks && touch common.yml
 cd .. && cd inventory && touch dev staging uat prod
 ```
 
+![cd inventory & touch dev staging uat prod](./images/5.%20cd%20&%20cd%20inventory%20&%20touch%20dev%20staging%20uat%20prod.png)
+
 An Ansible inventory file defines the hosts and groups of hosts upon which commands, modules and tasks in a playbook operate. Since we intend to execute Linux commands on remote hosts and ensure that it is the intended configuration particular server that occurs. It is important to have a way to organize our hosts in such an Inventory.
 
 * Update your `inventory/dev.yml` file with the code shown below:
@@ -172,6 +174,8 @@ An Ansible inventory file defines the hosts and groups of hosts upon which comma
 [lb]
 <Load-Balancer-Private-IP-Address> ansible_ssh_user='ubuntu'
 ```
+
+![update inventory/dev.yml](./images/5.%20update%20inventory:dev.png)
 
 ### Step 6: Setup an ssh-agent and Connect VS Code to your Jenkins-Ansible Instance
 
