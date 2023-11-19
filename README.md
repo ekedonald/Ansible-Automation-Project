@@ -22,6 +22,8 @@ The following steps are taken to install and configure **Ansible Client** as a *
 
 * Create a new repository called `ansible-config-mgt` in your GitHub account.
 
+![ansible-config-mgt](./images/1.%20ansible-config-mgt.png)
+
 * Update the `Name` tag on your `Jenkins` EC2 Instance to `Jenkins-Ansible`. This server will be used to run playbooks.
 
 * Install Ansible on the `Jenkins-Ansible` server.
@@ -30,11 +32,15 @@ The following steps are taken to install and configure **Ansible Client** as a *
 sudo apt update && sudo apt install ansible -y
 ```
 
+![apt update & install ansible](./images/1.%20apt%20update%20&%20install%20ansible.png)
+
 * Check the version of Ansible running on your instance by running the following command:
 
 ```sh
 ansible -- version
 ```
+
+![ansible version](./images/1.%20ansible%20version.png)
 
 ![initial setup](./images/1.%20initial%20set%20up.png)
 _Your set up will look like this._
