@@ -278,6 +278,8 @@ It is time to start giving Ansible the instructions on what you need to perform 
         state: latest
 ```
 
+![playbooks/common.yml](./images/8.%20playbooks:common.png)
+
 The code above has two plays, the **first play** is dedicated to the **RHEL Servers** (i.e. NFS, Database, Web). The task will be performed as the `root` user hence the use of the **become: yes** key value pair. Since they are all **RHEL Based Servers**, the `yum module` is used to install `wireshark` and finally the **state: latest** key-value pair is used to specify that the wireshark installed is the latest version.
 
 The **second play** is dedicated to the **Ubuntu Server** (i.e. Load Balancer), it has two tasks: The **first task** is used to update the server. The `update_cahce` is similar to `apt update` and the **second task** is used to download the latest version of `wireshark` using the `apt module`.
@@ -292,25 +294,41 @@ Now that all of your directories and files live on your local machine, you need 
 git status
 ```
 
+![git status](./images/9.%20git%20status.png)
+
 ```sh
 git add inventory playbooks
 ```
+
+![git add inventory playbooks](./images/9.%20git%20add%20inventory%20playbooks.png)
 
 ```sh
 git commit -m "commit message"
 ```
 
+![git commit](./images/9.%20git%20commit.png)
+
 ```sh
 git push --set-upstream origin prj-145
 ```
 
+![git push branch](./images/9.%20git%20push%20branch.png)
+
 * Got to your `ansible-config-mgt` repository on GitHub and click on the `Compare & pull request` button.
+
+![compare & pull request](./images/9.%20compare%20&%20pull%20request.png)
 
 * Click on the `Create pull request` button.
 
+![create pull request](./images/9.%20create%20pull%20request.png)
+
 * Click on the `Merge pull request` button.
 
+[merge pull request](./images/9.%20merge%20pull%20request.png)
+
 * Click on the `Confirm merge` button.
+
+![confirm merge](./images/9.%20confirm%20merge.png)
 
 * Head back to your terminal on VS Code, checkout from `prj-145` branch into the main and pull down the latest changes using the commands shown below:
 
