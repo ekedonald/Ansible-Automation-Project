@@ -111,11 +111,15 @@ http://private_ip_address_jenkins_ansible_server:8080/github-webhook/
 git clone <ansible-config-mgt-repository-link>
 ```
 
+![git clone](./images/4.%20git%20clone.png)
+
 * Go into the `ansible-config-mgt` directory and pull the repo to ensure the directory is up to date.
 
 ```sh
 cd ansible-config-mgt && git pull
 ```
+
+![cd ansible config mgt & git pull](./images/4.%20cd%20ansible%20repo%20&%20git%20pull.png)
 
 ### Step 5: Begin Ansible development and Set up an Ansible Inventory
 
