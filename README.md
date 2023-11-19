@@ -391,5 +391,5 @@ ansible lb -i inventory/dev -m command -a "wireshark --version"
 
 ![ansible adhoc3](./images/10.%20ansible%20adhoc3.png)
 
+Your updated Ansible architecture now looks like this:
 ![final setup](./images/11.%20final%20set%20up.png)
-_Your updated Ansible architecture now looks like this._
